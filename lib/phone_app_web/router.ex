@@ -18,6 +18,10 @@ defmodule PhoneAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/messages", MessageController, :index
+    get "/messages/new", MessageController, :new
+    post "/messages/new", MessageController, :create
+    get "/messages/:contact_id", MessageController, :show
   end
 
   # Other scopes may use custom stacks.
