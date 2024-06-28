@@ -24,21 +24,36 @@ defmodule PhoneApp.Conversations do
   end
 
   def send_sms_message(params = %Schema.NewMessage{}) do
-    # This version of send_sms_message uses mock data, it doesn't
-    # make an HTTP request.
-    #
-    # Later, we will write a new version that sends an HTTP request
-    # to a mock SMS server.
-    params = %{
-      message_sid: "mock-" <> Ecto.UUID.generate(),
-      account_sid: "mock",
-      body: params.body,
-      from: "mock",
+    msg = %{
+      from: your_number(),
       to: params.to,
-      status: "mock",
-      direction: :outgoing
+      body: params.body
     }
 
-    create_sms_message(params)
+    case PhoneApp.Twilio.send_sms_message!(msg) do
+      %{body: resp = %{}} ->
+        params = %{
+          message_sid: resp["sid"],
+          account_sid: resp["account_sid"],
+          body: resp["body"],
+          from: resp["from"],
+          to: resp["to"],
+          status: resp["status"],
+          direction: :outgoing
+        }
+
+        create_sms_message(params)
+
+      %{body: %{"code" => _, "message" => err}} ->
+        {:error, err}
+
+      _err ->
+        {:error, "Failed to send message"}
+    end
+  end
+
+  def your_number do
+    twilio_config = Application.get_env(:phone_app, :twilio, [])
+    Keyword.fetch!(twilio_config, :number)
   end
 end

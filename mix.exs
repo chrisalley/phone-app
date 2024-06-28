@@ -59,7 +59,8 @@ defmodule PhoneApp.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:ex_phone_number, "~> 0.3"},
-      {:faker, "~> 0.17", only: [:dev, :test]}
+      {:faker, "~> 0.17", only: [:dev, :test]},
+      {:req, "~> 0.4"}
     ]
   end
 

@@ -24,6 +24,12 @@ defmodule PhoneAppWeb.Router do
     get "/messages/:contact_id", MessageController, :show
   end
 
+  scope "/webhook", PhoneAppWeb.Webhook do
+    pipe_through [:api]
+
+    post "/sms", TwilioController, :sms
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", PhoneAppWeb do
   #   pipe_through :api
