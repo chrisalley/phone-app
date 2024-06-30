@@ -23,6 +23,8 @@ config :phone_app, PhoneAppWeb.Endpoint,
 # In test we don't send emails.
 config :phone_app, PhoneApp.Mailer, adapter: Swoosh.Adapters.Test
 
+config :phone_app, Oban, testing: :manual
+
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
 

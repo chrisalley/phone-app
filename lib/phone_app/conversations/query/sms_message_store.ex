@@ -52,4 +52,8 @@ defmodule PhoneApp.Conversations.Query.SmsMessageStore do
     )
     |> Repo.all()
   end
+
+  def get_sms_message!(id) do
+    Repo.get!(SmsMessage, id)
+  end
 end

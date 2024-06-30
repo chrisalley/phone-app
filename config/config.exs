@@ -31,6 +31,14 @@ config :phone_app, PhoneAppWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :phone_app, PhoneApp.Mailer, adapter: Swoosh.Adapters.Local
 
+config :phone_app, Oban,
+  repo: PhoneApp.Repo,
+  plugins: [
+    # 1 hour
+    {Oban.Plugins.Pruner, max_age: 60 * 60}
+  ],
+  queues: [default: 10]
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",

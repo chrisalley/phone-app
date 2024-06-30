@@ -14,6 +14,7 @@ defmodule PhoneApp.Application do
       {Phoenix.PubSub, name: PhoneApp.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: PhoneApp.Finch},
+      {Oban, Application.fetch_env!(:phone_app, Oban)},
       # Start a worker by calling: PhoneApp.Worker.start_link(arg)
       # {PhoneApp.Worker, arg},
       # Start to serve requests, typically the last entry
