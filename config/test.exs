@@ -25,6 +25,13 @@ config :phone_app, PhoneApp.Mailer, adapter: Swoosh.Adapters.Test
 
 config :phone_app, Oban, testing: :manual
 
+config :phone_app, :twilio,
+  key_sid: "mock-key-sid",
+  key_secret: "mock-key",
+  account_sid: "mock-account",
+  number: "+19998887777",
+  base_url: "http://localhost:4005/2010-04-01"
+
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
 

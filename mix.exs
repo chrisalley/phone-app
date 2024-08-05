@@ -61,7 +61,8 @@ defmodule PhoneApp.MixProject do
       {:ex_phone_number, "~> 0.3"},
       {:faker, "~> 0.17", only: [:dev, :test]},
       {:req, "~> 0.4"},
-      {:oban, "~> 2.16"}
+      {:oban, "~> 2.16"},
+      {:bypass, "~> 2.1"}
     ]
   end
 
